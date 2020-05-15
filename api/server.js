@@ -6,7 +6,7 @@ const server = express()
 const PORT = process.env.PORT || 4000
 
 server.use(express.json())
-server.use("/api/project", projectRoute)
+server.use("/api", projectRoute)
 
 server.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`)

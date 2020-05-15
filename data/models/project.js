@@ -14,7 +14,7 @@ function addResource(resource) {
 }
 
 function getResources() {
-  return db('resources').select('*')
+  return db('resources')
 }
 
 function addProject(project) {
@@ -22,13 +22,23 @@ function addProject(project) {
 }
 
 function getProjects() {
-  return db('projects').select('*')
+  return db('projects')
 }
 
 function addTask(task) {
-  return db('tasks').insert(task)
+  return db('task').insert(task)
 }
 
+/*
+  SELECT task.id, task.description, task.notes, projects.name, projects.description, task.completed
+  FROM task
+  JOIN projects
+  ON task.project_id = projects.id
+  */
+
 function getTasks() {
-  return db('tasks').select('*')
+  return db('task')
+    .select('task.id', 'task.description', 'task.notes', 'projects.name', 'projects.description', 'task.completed')
+    .from('task')
+    .join('projects', 'projects.id', '=', 'task.project_id')
 }
